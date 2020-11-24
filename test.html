@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/themes/dark.js"></script>
+  <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+</head>
+
+<body>
+
+  <div id="chartdiv"></div>
+
+</body>
+
+
+<!-- Styles -->
+<style>
+body { background-color: #30303d; color: {#FFEBEE,#FFCDD2,#EF9A9A,#E57373,#EF5350,#F44336,#E53935,#D32F2F}; }
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+</style>
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_dark);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv", am4charts.ChordDiagram);
+chart.hiddenState.properties.opacity = 0;
+
+var data = [];
+var letters =["pathologie", "anatomie", "valeur", "examen", "traitement", "sosy", "substance", "mode"];;
+
+function randomLetter(except) {
+    var letter = letters[Math.floor(Math.random() * (letters.length - 1))];
+    if (letter == except) {
+        return randomLetter(except);
+    }
+    else {
+        return letter;
+    }
+}
+
+for (var i = 0; i < letters.length; i++) {
+    var fromLetter = letters[i];
+    for (var o = 0; o < 3; o++) {
+        data.push({ from: fromLetter, to: randomLetter(fromLetter), value: Math.round(Math.random() * 100) });
+    }
+}
+
+chart.data = data;
+
+chart.dataFields.fromName = "from";
+chart.dataFields.toName = "to";
+chart.dataFields.value = "value";
+chart.nonRibbon = true;
+chart.sortBy = "name";
+chart.startAngle = 90;
+chart.endAngle = 450;
+
+var nodeTemplate = chart.nodes.template;
+nodeTemplate.fill = chart.colors.getIndex(0);
+nodeTemplate.fillOpacity = 0.4;
+nodeTemplate.slice.disabled = true;
+nodeTemplate.setStateOnChildren = true;
+nodeTemplate.label.disabled = true;
+nodeTemplate.togglable = false;
+
+nodeTemplate.readerTitle = "Drag to rearrange";
+nodeTemplate.showSystemTooltip = true;
+
+var hoverState = nodeTemplate.states.create("hover");
+hoverState.properties.fillOpacity = 1;
+
+var linkTemplate = chart.links.template;
+linkTemplate.opacity = 0.1;
+linkTemplate.stroke = chart.colors.getIndex(0);
+linkTemplate.defaultState.properties.opacity = 0.1;
+linkTemplate.tooltipText = "";
+
+var linkHoverState = linkTemplate.states.create("hover");
+linkHoverState.properties.opacity = 1;
+
+nodeTemplate.events.on("over", function (event) {
+    var node = event.target;
+    node.outgoingDataItems.each(function (dataItem) {
+        dataItem.link.isHover = true;
+    })
+})
+
+nodeTemplate.events.on("out", function (event) {
+    var node = event.target;
+    node.outgoingDataItems.each(function (dataItem) {
+        dataItem.link.isHover = false;
+    })
+})
+
+nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.grab;
+
+nodeTemplate.cursorDownStyle = am4core.MouseCursorStyle.grabbing;
+
+var circleBullet = nodeTemplate.createChild(am4charts.CircleBullet);
+circleBullet.setStateOnChildren = true;
+circleBullet.circle.radius = 15;
+
+var circleHoverState = circleBullet.states.create("hover");
+circleHoverState.properties.scale = 1.5;
+
+// we create a separate label as node.label ispositioned differently and doesn't fit perfectly for one-letter labels
+var label = circleBullet.createChild(am4core.Label);
+label.text = "{name}";
+label.horizontalCenter = "middle";
+label.verticalCenter = "middle";
+
+var labelHoverState = label.states.create("hover");
+labelHoverState.properties.fill = am4core.color("#ffffff");
+
+}); // end am4core.ready()
+</script>
+
+
+</html>
