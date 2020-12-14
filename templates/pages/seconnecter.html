@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Connexion - Med'Annotate</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<noscript><link rel="stylesheet" href="/static/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="http://127.0.0.1:3309/index">Med'Annotate</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="http://127.0.0.1:3309/index">Accueil</a></li>
+											<li><a href="http://127.0.0.1:3309/description">Description</a></li>
+											<li><a href="http://127.0.0.1:3309/equipe">Equipe</a></li>
+											<li><a href="http://127.0.0.1:3309/inscription">Inscription</a></li>
+											<li><a href="http://127.0.0.1:3309/connexion">Connexion</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Connexion</h2>
+							<p>Connectez-vous afin d'accéder à l'outil d'annotation et de visualisation.</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<h3>Plus qu'une étape !</h3>
+								<form action="/home" method="post">
+									<label for="login" >Adresse mail :</label>
+
+									<input type="text" id="login" name="login_login" />
+									<br>
+									<label for="password" >Mot de Passe :</label>
+
+									<input type="password" id="password" name="login_password" />
+									<br>
+									<input type="submit" value = "Se connecter" href="http://127.0.0.1:3309/interface">
+
+									</form>
+									
+									<li><a href="http://127.0.0.1:3309/inscription">S'inscrire</a></li>
+
+									<script>
+										if ( {{content}} < 0 ){
+										  alert("Pseudo ou mot de passe incorrect");
+										  }
+									</script>
+							</div>
+						</section>
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; MEDICAL DATA TER M1 MIASHS</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li><li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/static/js/jquery.min.js"></script>
+			<script src="/static/js/jquery.scrollex.min.js"></script>
+			<script src="/static/js/jquery.scrolly.min.js"></script>
+			<script src="/static/js/browser.min.js"></script>
+			<script src="/static/js/breakpoints.min.js"></script>
+			<script src="/static/js/util.js"></script>
+			<script src="/static/js/main.js"></script>
+			<script src="https://kit.fontawesome.com/6a3d3257ac.js" crossorigin="anonymous"></script>
+
+	</body>
+</html>

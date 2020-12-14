@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Inscription - Med'Annotate</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/static/css/main.css" />
+		<noscript><link rel="stylesheet" href="/static/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="http://127.0.0.1:3309/index">Med'Annotate</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="http://127.0.0.1:3309/index">Accueil</a></li>
+											<li><a href="http://127.0.0.1:3309/description">Description</a></li>
+											<li><a href="http://127.0.0.1:3309/equipe">Equipe</a></li>
+											<li><a href="http://127.0.0.1:3309/inscription">Inscription</a></li>
+											<li><a href="http://127.0.0.1:3309/connexion">Connexion</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Inscription</h2>
+							<p>Veuillez vous inscrire afin d'avoir accès à l'outil.</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+
+								<h3>Vous faites partie du corps médical ? Aidez-nous.</h3>
+								<form action="/inscrit" method="post">
+								  <!-- form pour dire qu'on fait un formulaire -->
+								  <!-- post pour ne pas que les valeurs entrent dans l'url-->
+
+									<label for="email" >Adresse mail :</label>
+									<!--for du label a la mm valeur que id de input -->
+									<input type="email" id="login" name="login_login" />
+									<br>
+									<label for="password" >Mot de passe :</label>
+
+									<input type="password" id="password" name="login_password" />
+									<br>
+									<label for="text" >Prénom :</label>
+
+									<input type="text" id="prenom" name="login_prenom" />
+									<br>
+									<label for="text" >Nom :</label>
+
+									<input type="text" id="nom" name="login_nom" />
+									<br>
+									<label for="text" >Date de naissance :</label>
+
+									<input type="date" id="date_naiss" value="22-07-2018"
+									min="01-01-1900" max="31-12-2020" name="login_date_naiss" style="color:black;"/>
+
+									<input type="submit" value = "Valider l'inscription"/ href = /loi >
+									<!-- on peut utiliser boutton au lieu de input si on veut associer bouton à une image ect -->
+									</form>
+									
+									<li><a href="http://127.0.0.1:3309/connexion">Retour à l'accueil de connexion</a></li>
+
+									<script>
+
+										if ( {{ content }} > 0 ){
+
+										  if( {{ content }} > 1 ){
+											
+											if( {{ content }} > 2 ){
+											  
+											  alert("Une erreur est survenue lors de l'inscription.")
+
+											}
+											else{
+											  alert("Le mot de passe choisi est trop court.")
+											}
+
+										  }
+										  else{
+											alert("Mail déjà associé à un compte")
+										  }
+										  }
+										else {
+										  alert("Un email de confirmation vous a été envoyé");
+										}
+									</script>
+
+							</div>
+						</section>
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; MEDICAL DATA TER M1 MIASHS</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li><li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/static/js/jquery.min.js"></script>
+			<script src="/static/js/jquery.scrollex.min.js"></script>
+			<script src="/static/js/jquery.scrolly.min.js"></script>
+			<script src="/static/js/browser.min.js"></script>
+			<script src="/static/js/breakpoints.min.js"></script>
+			<script src="/static/js/util.js"></script>
+			<script src="/static/js/main.js"></script>
+			<script src="https://kit.fontawesome.com/6a3d3257ac.js" crossorigin="anonymous"></script>
+
+	</body>
+</html>
