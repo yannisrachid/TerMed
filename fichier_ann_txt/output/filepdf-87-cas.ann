@@ -1,0 +1,68 @@
+T1	valeur 446 464	sans particularité
+T2	valeur 1015 1021	normal
+T3	examen 1859 1871	histologique
+T4	traitement 847 857	lombotomie
+T5	pathologie 1306 1312	cancer
+T7	substance 2205 2215	Ethambutol
+T8	examen 1328 1336	imagerie
+T9	anatomie 504 510	rénale
+T10	pathologie 1165 1183	tuberculose rénale
+T12	mode 431 437	rectal
+T13	pathologie 285 292	charbon
+T14	duree 2311 2325	pendant 4 mois
+T15	substance 258 265	amiante
+T16	mode 783 798	voie excrétrice
+T17	anatomie 482 500	vésico-prostatique
+T18	traitement 1960 1972	intervention
+T20	anatomie 571 595	convexité du rein gauche
+T21	examen 1992 2014	radiographie de thorax
+T22	pathologie 243 265	exposition à l’amiante
+T23	pathologie 538 555	tumeur tissulaire
+T24	traitement 805 827	néphrectomie partielle
+T25	examen 1244 1273	examen histologique définitif
+T26	anatomie 1475 1494	caséo-folliculaires
+T27	pathologie 221 240	pneumoconiose mixte
+T28	substance 2148 2163	antituberculeux
+T29	valeur 1403 1421	grade 1 de Führman
+T30	pathologie 105 114	hématurie
+T31	pathologie 183 213	diabète non insulino-dépendant
+T32	pathologie 134 146	état général
+T33	pathologie 1357 1371	adénocarcinome
+T34	anatomie 2008 2014	thorax
+T35	pathologie 1003 1008	rénal
+T36	anatomie 992 1008	parenchyme rénal
+T37	anatomie 400 416	fosses lombaires
+T38	substance 285 292	charbon
+T39	pathologie 2072 2085	pneumoconiose
+T40	anatomie 1765 1778	épithélioïdes
+T41	examen 423 437	toucher rectal
+T42	pathologie 1426 1432	tumeur
+T43	examen 470 510	échographie vésico-prostatique et rénale
+T44	pathologie 2107 2118	tuberculose
+T45	anatomie 431 437	rectal
+T46	traitement 1667 1674	éxérèse
+T47	anatomie 1177 1183	rénale
+T48	anatomie 2043 2060	bases pulmonaires
+T50	mode 677 686	injection
+T51	anatomie 1943 1951	crachats
+T52	examen 600 617	tomodensitométrie
+T53	examen 1877 1898	recherche de bacilles
+T54	valeur 559 563	3 cm
+T55	examen 1553 1563	coloration
+T56	examen 956 965	palpation
+T57	examen 389 416	examen des fosses lombaires
+T58	sosy 59 98	troubles mictionnels obstructifs isolés
+T59	sosy 105 114	hématurie
+T60	sosy 118 146	altération de l’état général
+T61	sosy 221 265	pneumoconiose mixte d’exposition à l’amiante
+T62	sosy 423 464	toucher rectal étaient sans particularité
+T63	sosy 523 555	présence d’une tumeur tissulaire
+T64	sosy 625 631	lésion
+T65	sosy 881 887	lésion
+T66	sosy 1098 1183	présence de granulomes giganto-cellulaires diffus évocateurs d’une tuberculose rénale
+T67	sosy 1464 1508	granulomes caséo-folliculaires tuberculoïdes
+T68	sosy 1553 1572	coloration de Ziehl
+T69	sosy 1599 1606	lésions
+T70	sosy 1622 1640	infection actuelle
+T71	sosy 1754 1778	granulomes épithélioïdes
+T72	sosy 2098 2118	signe de tuberculose
