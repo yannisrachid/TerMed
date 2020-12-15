@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Visualisation</title>
+    <link rel="stylesheet" href="/static/css/chartCentury.css">
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/dark.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script type="text/javascript" src="d3.min.js"></script>
+  </head>
+
+  <body>
+    <div id="page-wrapper">
+
+      <!-- Header -->
+
+
+      <!-- Main -->
+        <article id="main" >
+          <header>
+            <h2>Med'Annotate</h2>
+            <p>Annotez et visualisez.</p>
+          </header>
+          <section class="wrapper style5" height="800px">
+            <div class="inner">
+              <div class="chartdiv">
+                <!-- Contenu à mettre ici -->
+              </div>
+            </div>
+          </section>
+        </article>
+
+      <!-- Footer -->
+        <footer id="footer">
+          <ul class="icons">
+            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+          <ul class="copyright">
+            <li>&copy; MEDICAL DATA TER M1 MIASHS</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+          </ul>
+        </footer>
+
+    </div>
+
+    <div id="container" class="container">
+      <div class="chartdiv"></div>
+    </div>
+
+
+
+    <!-- <div class="chartdiv"> </div> -->
+
+  </body>
+
+  <script>
+
+    donnees={{ donnees_json | tojson }};
+
+    var couleur = ["black","teal","red","yellow","green","purple","navy","maroon","MediumVioletRed","Lime","Gold","Fuchsia","DarkOrange","Aqua","Crimson"]
+
+    function miseForme(dico){
+      var bonDico = []
+      var keys = Object.keys(dico)
+      for (var i=0; i<keys.length;i++){
+        var ligneDico = {
+          "from": keys[i],
+          "value": dico[keys[i]],
+          "size": 40+dico[keys[i]].length,
+          "nodeColor": couleur[i]
+        }
+        bonDico.push(ligneDico)
+      }
+      return bonDico
+    }
+    var bonDico = miseForme(donnees)
+
+
+
+      function newDonnee(donnees){
+        var keys = Object.keys(donnees);
+        for (var i=0; i<keys.length;i++){
+          console.log("Clé : ",keys[i]);
+          var boule = [];
+          for (var j=0; j< donnees[keys[i]].length; j++){
+            var riz = {
+              "from" : donnees[ keys[i] ][j],
+              "size" : 30,
+              "nodeColor": couleur[j]
+            };
+            boule. push (riz);
+
+          }
+        creaChordDiag(keys[i], boule);
+        console.log(boule);
+      }
+      return boule;
+    }
+    console.log("-----------------------------")
+    console.log(donnees);
+    var boule = newDonnee(donnees);
+    console.log(boule);
+
+
+    function forEachValue(donnees){
+      var keys = Object.keys(donnees);
+      var html = "";
+      for (var i=0; i< keys.length;i++){
+        html += "<div class='text'> <h2> "+keys[i]+"</h2> </div> <div class='graph' id ="+keys[i]+">  </div>";
+
+      }
+      document.getElementById("container").innerHTML = html;
+    }
+
+    forEachValue(donnees);
+
+    function creaChordDiag(id, donnees) {
+
+      am4core.ready(function() {
+
+        // Code pour specifier l'utilisation du dark theme
+        am4core.useTheme(am4themes_dark);
+        am4core.useTheme(am4themes_animated);
+
+
+        // Un élément HTML ici chartDiv cible pour créer le graphique.
+        var chart = am4core.create(id, am4charts.ChordDiagram);
+
+        //chart.data = newTabDonnee;
+        //nos données
+        chart.data = donnees;
+
+        // Il serait interessant de donner une couleur a un type d'annotations et qu'il ne change pas, pour pouvoir mettre en place a code couleur
+        // Pour value il serait interessant d'y stocker la somme des annotations contenant dans sur le sommet
+        // chart.dataSource.url = "chart_data.json";
+        //Chargement des données externes
+
+        chart.dataFields.fromName = "from";
+        //classe par noms
+        chart.sortBy = "name";
+        chart.nonRibbon = true;
+        chart.startAngle = 100;
+        chart.endAngle = 450;
+
+        chart.dataFields.color = "nodeColor";
+
+        var nodeTemplate = chart.nodes.template;
+
+        //Enleve les sommets rectangulaire
+        nodeTemplate.slice.disabled = true;
+        // opacity des nodetemplate
+        nodeTemplate.fillOpacity = 0.7;
+
+        /////TEST////
+        nodeTemplate.label.disabled = false;
+        /////////////////
+
+        // ToOLTIP description au passage d'un sommet
+        //nodeTemplate.tooltipText = "Liste:";
+
+        ////////////////////////////////////////////////
+        // ???
+        //nodeTemplate.setStateOnChildren = true;
+        //Enleve les objets label
+        //nodeTemplate.label.disabled = true;
+        // ???
+        //nodeTemplate.togglable = false;
+        ////////////////////////////////////////////////
+        nodeTemplate.clickable = false;
+        nodeTemplate.draggable = false;
+
+        // pour l'opacité des arretes ainsi que pour leur largueut
+        var link = chart.links.template;
+        link.middleLine.strokeWidth = 1.5;
+        link.middleLine.strokeOpacity = 0;   // AMODIF
+
+        var circleBullet = nodeTemplate.createChild(am4charts.CircleBullet);
+
+        // ???
+        circleBullet.setStateOnChildren = true;
+
+        // Rayon de nos sommets, ici nous pourrons mettre la function qui retoure la somme des elements par type d'annotations
+        circleBullet.circle.strokeWidth = 2;
+        circleBullet.circle.propertyFields.radius = "size";
+
+        // Pour faire un gradient de couleur sur les arrete
+        //var link = chart.links.template;
+        //link.colorMode = "gradient";
+        //link.fillOpacity = 0.3;
+
+        // animation au passage d'un sommets circlebullet, le fait grossir de 109,5%
+        var circleHoverState = circleBullet.states.create("hover");
+        circleHoverState.properties.scale = 1.095;
+
+
+        // changement de curseur lorsque la souris passe sur un sommets, curseur de la main avec animation
+        nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.grab;
+        nodeTemplate.cursorDownStyle = am4core.MouseCursorStyle.grabbing;
+
+        var hoverState = nodeTemplate.states.create("hover");
+        hoverState.properties.fillOpacity = 1;
+
+
+      });
+    }
+
+
+
+
+
+  </script>
+
+</html>
