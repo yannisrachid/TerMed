@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Titre de la page</title>
+    <link rel="stylesheet" href="test1.css">
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/dark.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script type="text/javascript" src="d3.min.js"></script>
+  </head>
+
+  <body>
+
+    <div id="chartdiv">
+      <table>
+
+      </table>
+    </div>
+
+  </body>
+
+  <script type="text/javascript">
+    function CreaDataChart(){
+      $.ajax({
+        url: "chart_data.json",
+        dataType: "json",
+        success: function(data){
+          console.log(data);
+        }
+
+      });
+    }
+
+    //function clicSurNode(evenement) {
+    //    alert("On a cliqué");
+      //  console.log(evenement);
+    //}
+
+    //var chart = document.getElementById("chartdiv");
+    //chart.addEventListener("click", );
+
+</script>
+
+  </script>
+  <script>
+
+    am4core.ready(function() {
+
+      // Code pour specifier l'utilisation du dark theme
+      am4core.useTheme(am4themes_dark);
+      am4core.useTheme(am4themes_animated);
+
+
+      // Un élément HTML ici chartDiv cible pour créer le graphique.
+      var chart = am4core.create("chartdiv", am4charts.ChordDiagram);
+
+      //nos données
+      chart.data = [
+        { "from": "valeur", "value": ["10","2","3","4"], "size": 5,"nodeColor":"green"},
+        { "from": "partie", "value": "coeur", "size": 10,"nodeColor":"blue"},
+        { "from": "maladie", "value": "shvt1", "size": 15,"nodeColor":"yellow"},
+        { "from": "mesure", "value": "2cm", "size": 20,"nodeColor":"red"},
+        { "from": "dose", "value": "14ml", "size": 25,"nodeColor":"purple"}
+
+      ];
+
+      // Il serait interessant de donner une couleur a un type d'annotations et qu'il ne change pas, pour pouvoir mettre en place a code couleur
+      // Pour value il serait interessant d'y stocker la somme des annotations contenant dans sur le sommet
+      // chart.dataSource.url = "chart_data.json";
+      //Chargement des données externes
+
+      chart.dataFields.fromName = "from";
+      chart.dataFields.toName = "to";
+      chart.dataFields.value = "value";
+      //classe par noms
+      chart.sortBy = "name";
+      chart.nonRibbon = true;
+      chart.startAngle = 90;
+      chart.endAngle = 450;
+
+      chart.dataFields.color = "nodeColor";
+
+      var nodeTemplate = chart.nodes.template;
+
+      //Enleve les sommets rectangulaire
+      nodeTemplate.slice.disabled = true;
+      // opacity des nodetemplate
+      nodeTemplate.fillOpacity = 0.45;
+
+      /////TEST////
+      nodeTemplate.label.disabled = true;
+      /////////////////
+
+      // ToOLTIP description au passage d'un sommet
+      //nodeTemplate.tooltipText = "Liste:";
+
+      ////////////////////////////////////////////////
+      // ???
+      //nodeTemplate.setStateOnChildren = true;
+      //Enleve les objets label
+      //nodeTemplate.label.disabled = true;
+      // ???
+      //nodeTemplate.togglable = false;
+      ////////////////////////////////////////////////
+      nodeTemplate.clickable = true;
+      nodeTemplate.draggable = false;
+
+
+
+      nodeTemplate.events.on("hit", function(ev) {
+        var divAnnValues = document.createElement("div");
+        const chartdiv = document.getElementById('chartdiv');
+        chartdiv.appendChild(divAnnValues);
+
+        console.log("clicked on ", ev.target.dataItem.dataContext.value);
+      }, this);
+
+      //  console.log(ev.target.dataItem.component.value);
+      //}, this);
+
+//function(typeAnn) {
+  //      var tabAnn = []
+    //    for (var i=0; i < chart.data.length; i++){
+      //    if (chart.data.fromName[i] == typeAnn){
+        //    tabAnn.push(chart.data.value[i]);
+          //}
+      //  });
+
+
+      var linkTemplate = chart.links.template;
+      linkTemplate.opacity = 0.5;
+      // ???
+      //linkTemplate.stroke = chart.colors.getIndex(0);
+      // A l'air de servir au fait de ne pas colorer l'arrete indefiniment apres passage de la souris dessus
+      linkTemplate.defaultState.properties.opacity = 0.5;
+      // ???
+      //linkTemplate.tooltipText = "";
+
+      // pour l'opacité des arretes ainsi que pour leur largueut
+      var link = chart.links.template;
+      link.middleLine.strokeWidth = 1.5;
+      link.middleLine.strokeOpacity = 0.5;
+
+      var circleBullet = nodeTemplate.createChild(am4charts.CircleBullet);
+
+      // ???
+      //circleBullet.setStateOnChildren = true;
+
+      // Rayon de nos sommets, ici nous pourrons mettr la function qui retoure la somme des elements par type d'annotations
+      circleBullet.circle.radius = 15;
+      circleBullet.circle.strokeWidth = 2;
+      circleBullet.circle.propertyFields.radius = "size";
+      // Pour faire un gradient de couleur sur les arrete
+      //var link = chart.links.template;
+      //link.colorMode = "gradient";
+      //link.fillOpacity = 0.3;
+
+      // animation au passage d'un sommets circlebullet, le fait grossir de 108,5%
+      var circleHoverState = circleBullet.states.create("hover");
+      circleHoverState.properties.scale = 1.085;
+
+
+      // changement de curseur lorsque la souris passe sur un sommets, curseur de la main avec animation
+      nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.grab;
+      nodeTemplate.cursorDownStyle = am4core.MouseCursorStyle.grabbing;
+
+      var hoverState = nodeTemplate.states.create("hover");
+      hoverState.properties.fillOpacity = 0.7;
+
+      //Ne marche pas, est censé modifié l'oapcité aux passages d'un objet linkTemplate
+      var linkHoverState = linkTemplate.states.create("hover");
+      linkHoverState.properties.opacity = 0.96;
+
+      var label = circleBullet.createChild(am4core.Label);
+      label.horizontalCenter = "middle";
+      label.verticalCenter = "middle";
+      label.text = "{fromName}";
+
+
+    });
+
+  </script>
+</html>
