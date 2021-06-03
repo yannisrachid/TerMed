@@ -14,12 +14,12 @@ _Superviseurs_ : Namrata Patel, Guilhem Mayoral, Fleur
 | library | version |
 | ------ | ------ |
 | pandas | 1.1.2 |
-| re | x.x.x |
-| flask | x.x.x |
+| re | 2021.4.4 |
+| flask | 2.0.1 |
 | ipython | 7.20.0 |
-| spacy | x.x.x |
-| dash | x.x.x |
-| matplotlib | x.x.x |
+| spacy | 3.0.6 |
+| dash | 1.20.0 |
+| matplotlib | 3.4.2 |
 
 ### Etapes du projet
 
@@ -30,9 +30,5 @@ _Superviseurs_ : Namrata Patel, Guilhem Mayoral, Fleur
 - Visualisation des résultats obtenus sur le corpus
 - Implémentation de la visualisation sur le site web
 - Ecriture du rapport et préparation de la présentation
-
-### Webographie
-
-à ajouter
 
 **Pour les liens du projet, svp, le lien est ici [here]()**
